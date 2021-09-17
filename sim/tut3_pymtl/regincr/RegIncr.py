@@ -28,11 +28,17 @@ class RegIncr( Model ):
         s.reg_out.next = 0
       else:
         s.reg_out.next = s.in_
-
+    
+    # Concurrent block modeling incrementer
+    @s.combinational
+    def block2():
+      s.out.value = s.reg_out + 1
+  
     # ''' TUTORIAL TASK ''''''''''''''''''''''''''''''''''''''''''''''''''
     # This model is incomplete. As part of the tutorial you will insert a
     # combinational concurrent block here to model the incrementer logic,
     # and later you will insert a line tracing function to compactly
     # output the input, register, and output values.
-    # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
+    # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''   
+  def line_trace( s ):
+    return "{} ({}) {}".format( s.in_, s.reg_out, s.out )
